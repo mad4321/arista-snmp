@@ -1,0 +1,22 @@
+Introduction
+============
+
+Arista custom SNMP script.
+Allow to get DDM attributes via SNMP.
+
+How to install
+==============
+
+  * Put ddm.py into /mnt/flash on Arista switch
+  * add config lines from config.cfg
+ 
+Changelog
+=========
+
+## 12/06/2019
+
+Version 0.01
+============
+
+  * First commit
+

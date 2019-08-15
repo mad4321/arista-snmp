@@ -1,0 +1,132 @@
+ARISTA-CUSTOM-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+     MODULE-IDENTITY, OBJECT-TYPE, Integer32,
+     TimeTicks, Gauge32, Counter32      FROM SNMPv2-SMI
+     MODULE-COMPLIANCE, OBJECT-GROUP    FROM SNMPv2-CONF
+     DisplayString                      FROM SNMPv2-TC
+     ifIndex                            FROM IF-MIB
+     arista                             FROM ARISTA-SMI-MIB;
+
+aristaCustomTree MODULE-IDENTITY
+    LAST-UPDATED "201905160000Z"
+    ORGANIZATION "Arista Networks, Inc."
+    CONTACT-INFO
+        "Arista Networks, Inc.
+
+         Postal: 5453 Great America Parkway
+                 Santa Clara, CA 95054
+
+         Tel: +1 408 547-5500
+
+         E-mail: snmp@arista.com"
+    DESCRIPTION
+            "The custom MIB module for Arista EOS switches."
+    REVISION      "201905160000Z"
+    DESCRIPTION "Initial version."
+    ::= { arista 100 }
+
+customAristaTreeInfo OBJECT IDENTIFIER ::= { aristaCustomTree 1 }
+
+customAristaDDMTable OBJECT-TYPE
+     SYNTAX     SEQUENCE OF AristaDDMEntry
+     MAX-ACCESS not-accessible
+     STATUS     current
+     DESCRIPTION 
+                "This table contains information about DDM on optical interfaces"
+     ::= { customAristaTreeInfo 1 }    
+
+customAristaDDMEntry OBJECT-TYPE
+     SYNTAX     AristaDDMEntry
+     MAX-ACCESS not-accessible
+     STATUS     current
+     DESCRIPTION 
+                "This entry contains information about DDM on optical interfaces"
+     INDEX      { ifIndex }
+     ::= { customAristaDDMTable 1 }
+                   
+AristaDDMEntry ::= SEQUENCE {        
+     aristaDDMupdateTime       TimeTicks,
+     aristaDDMtxPower          Integer32,
+     aristaDDMtxBias           Integer32,
+     aristaDDMrxPower          Integer32,
+     aristaDDMvoltage          Integer32,
+     aristaDDMtemperature      Integer32,
+     aristaDDMvendorSn         DisplayString,
+     aristaDDMnarrowBand       Integer32,
+     aristaDDMmediaType        DisplayString
+}
+
+aristaDDMupdateTime OBJECT-TYPE
+     SYNTAX     TimeTicks
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 1 }
+
+aristaDDMtxPower OBJECT-TYPE
+     SYNTAX     Integer32
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 2 }
+
+aristaDDMtxBias OBJECT-TYPE
+     SYNTAX     Integer32
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 3 }
+
+aristaDDMrxPower OBJECT-TYPE
+     SYNTAX     Integer32
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 4 }
+
+aristaDDMvoltage OBJECT-TYPE
+     SYNTAX     Integer32
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 5 }
+
+aristaDDMtemperature OBJECT-TYPE
+     SYNTAX     Integer32
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 6 }
+
+aristaDDMvendorSn OBJECT-TYPE
+     SYNTAX     DisplayString
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 7 }
+
+aristaDDMnarrowBand OBJECT-TYPE
+     SYNTAX     Integer32
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 8 }
+
+aristaDDMmediaType OBJECT-TYPE
+     SYNTAX     DisplayString
+     MAX-ACCESS read-only
+     STATUS     current
+     DESCRIPTION
+                ""  
+     ::= { customAristaDDMEntry 9 }
+
+END
